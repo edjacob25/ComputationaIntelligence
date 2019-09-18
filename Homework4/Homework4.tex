@@ -8,6 +8,7 @@
     \usepackage{tikz}
     \usepackage{fancyhdr}
     \usepackage{listings}
+    \usepackage{multicol}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -87,7 +88,7 @@
             B & 011101001  & 4 \\
             C & 111000110  & -2 \\
             D & 100001000  & 1 \\
-            E & 010101000  & -1
+            E & 010101000  & 0
         \end{tabular}
     \end{table}
     \begin{itemize}
@@ -99,20 +100,20 @@
             \item D: 2
             \item E: 0
         \end{itemize}
-        \item What is the average fitness of the chromosomes in the mating pool? 
-        
+        \item What is the average fitness of the chromosomes in the mating pool?
+
         2.8
 
         \item If the tournament size is reduced to one, what is the probability that the chromosome 100001000 appears in the mating pool?
-        
+
         100\%
 
         \item If the tournament size is increased to five, and both crossover and mutation rate are set to zero, what is the probability that the chromosome 010111000 survives to the next population?
-        
+
         0\%
 
     \end{itemize}
-    
+
     \item Whole arithmetic crossover
     \begin{align*}
         x=\{ 0.18, 0.75, 0.92, 0.26, 0.44 \}\\
@@ -122,31 +123,108 @@
         c^{1}_{.5} &= \{ 0.27, .76, .77, .195, .475 \} & c^{2}_{.5} &= \{ 0.27, .76, .77, .195, .475 \}\\
         c^1_{.1} &= \{ 0.342, 0.768, 0.65, 0.143 ,0.503 \} & c^2_{.1} &= \{ 0.198, 0.752, 0.89, 0.247 ,0.447\}\\
     \end{align*}
-    
+
     \pagebreak
-    \item Exponential ranking selection 
+    \item Exponential ranking selection
     \begin{table}[h]
         \centering
-        \begin{tabular}{l|l|l}
-            & Population & $f$ \\
+        \begin{tabular}{l|l|l|l|l}
+            & Population & $f$ & r & $f'$ \\
             \hline
-            A & 6661166703  & 5 \\
-            B & 3306772232  & 5 \\
-            C & 0489794549  & 4 \\
-            D & 2660088784  & 4 \\
-            E & 3578647359  & 3
+            A & 6661166703  & 5 & 3.5 & 2.296875\\
+            B & 3306772232  & 5 & 3.5 & 2.296875\\
+            C & 0489794549  & 4 & 1.5 & 0.421875\\
+            D & 2660088784  & 4 & 1.5 & 0.421875\\
+            E & 3578647359  & 3 & 0 & 0
         \end{tabular}
     \end{table}
+    Sum: 5.4375
+    \begin{itemize}
+        \item A: $\frac{2.29}{5.4375} = 0.4224$
+        \item B: $\frac{2.29}{5.4375} = 0.4224$
+        \item C: $\frac{0.42}{5.4375} = 0.0775$
+        \item D: $\frac{0.42}{5.4375} = 0.0775$
+        \item E: 0
+    \end{itemize}
 
 
     \item Schemata
-    
-    
+    \begin{itemize}
+        \item Given two schemata, 1*001*1* and 00*11*11, which schema corresponds to more solutions?
+        \begin{multicols}{2}
+            1*001*1* $\rightarrow$ 8
+            \begin{itemize}
+                \item 11001111
+                \item 11001110
+                \item 11001011
+                \item 11001010
+                \item 10001111
+                \item 10001110
+                \item 10001011
+                \item 10001010
+            \end{itemize}
+            \columnbreak
+            00*11*11 $\rightarrow$ 4
+            \begin{itemize}
+                \item 00111111
+                \item 00111011
+                \item 00011111
+                \item 00011011
+            \end{itemize}
+        \end{multicols}
+        \item What is the order of the schemata 01101001, ****1**0 and 1*0*0010?
+        \begin{itemize}
+            \item 01101001 $\rightarrow$ 8 $\rightarrow$ 2
+            \item ****1**0 $\rightarrow$ 2 $\rightarrow$ 0
+            \item 1*0*0010 $\rightarrow$ 6 $\rightarrow$ 1
+        \end{itemize}
+        \item What is the defining length of the schemata 00**1010, **0**111 and *0***1*0?
+        \begin{itemize}
+            \item 00**1010 $\rightarrow$ 7
+            \item **0**111 $\rightarrow$ 5
+            \item *0***1*0 $\rightarrow$ 6
+        \end{itemize}
+
+        \pagebreak
+
+        \item Given a population of five chromosomes: 100, 001, 111, 010, and 000, how many different schemata exist in such a population?  As part of your answer, calculate the lower and upper bounds of schemata in the population.\\
+        Upper bound = $5*2^3 = 40$ \\
+        Lower bound = $2^3 = 8$\\
+        \begin{multicols}{4}
+            \begin{itemize}
+                \item 000
+                \item 00*
+                \item 0*0
+                \item *00
+                \item 0**
+                \item **0
+                \item *0*
+                \item ***
+                \item 010
+                \item 01*
+                \item *10
+                \item *1*
+                \item 111
+                \item 11*
+                \item 1*1
+                \item *11
+                \item 1**
+                \item **1
+                \item 001
+                \item 0*1
+                \item *01
+                \item 100
+                \item 10*
+                \item 1*0
+            \end{itemize}
+        \end{multicols}
+    \end{itemize}
+
     \item Practical case
-    
+
 
     \item Analysis
-    
+
 
 \end{enumerate}
 \end{document}
