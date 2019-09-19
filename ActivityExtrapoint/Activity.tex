@@ -80,18 +80,18 @@
     \item \section*{The eight queens puzzle}
     \begin{itemize}
         \item Propose one suitable chromosome representation and briefly justify your answer.  By using the chromo-some representation you propose, indicate how the chessboard depicted in Fig. 1 would be representedin the genetic algorithm.
-        
+
         A simple, but useful represantion would be one of a list of integers from 1 to 8, without allowing repetition. In this form, the problem would be even easier to solve as multiple invalid states would be trimmed from the start. And well, the representation of the board shown would be [5,3,1,7,2,8,6,4]
-        
+
         \item Propose one suitable selection strategy and briefly justify your answer.
-        A tournament selection with an m of 4 would probably select very good representations fast as there is not that many options for the list 
+        A tournament selection with an m of 4 would probably select very good representations fast as there is not that many options for the list
 
         \item Propose one suitable crossover operator and briefly justify your answer.
-        
+
         Using a number between 2 and 6, using it as an index for the first parent, in which numbers to the left of the index would change positions with the equivalents in the second parent. AS
 
         \item Propose one suitable mutation operator and briefly justify your answer.
-        
+
         A mutation operator feasible for this representation would change the positions of a pair of items at a selected index. This assures us that it is only a small change but that it gives a noticeable different individual.
 
 
@@ -105,7 +105,7 @@
                 $A_1$ & 10011001  & 4 \\
                 $A_2$ & 01101010  & 4 \\
                 $A_3$ & 01010111  & 5 \\
-                $A_4$ & 01000010  & 2 
+                $A_4$ & 01000010  & 2
             \end{tabular}
         \end{table}
         Avg = 3.25
@@ -185,8 +185,14 @@
             m(H_3,t +1) &= 0.53 * 0.2 * 0.997 = 0.10568200000000001\\
             m(H_4,t +1) &= 2.92 * 1 * 0.999 = 2.91708\\
         \end{align*}
-    \item \section*{Steady-state genetic algorithm} 
+    \item \section*{Steady-state genetic algorithm}
 
+    \item \section*{Analyze the cases}
+    \begin{itemize}
+        \item Case 1 $\rightarrow$ We should reduce the mutation rate
+        \item Case 2 $\rightarrow$ We should increase the population size
+        \item Case 3 $\rightarrow$ This is the expected behaviour
+    \end{itemize}
 
 \end{enumerate}
 \end{document}
