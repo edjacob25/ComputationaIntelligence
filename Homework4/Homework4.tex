@@ -222,9 +222,21 @@
 
     \item Practical case
 
+    The representation chosen for this exervise would be one in which each action is represented by a number associated with it. For example 1 = Go Up, 2 = Go Right, 3 = Go Down and 4 = Go Left. As the memory of the robot can only store 100 actions, the chromosome would have a length of 100. A crossover operator would be as simple as an index in which each parent splits and each part goes to each children. A mutation operand would simply change a selected entity to a random option different that the one it already has.
+
+    The optimal path in the figure shown, which consists in actions “move up”, “move to the right”, “move to the right”, “move to the right”, “move up”, “move up”, “move to the left”, “move to the left”, “move to the left”, “move up”, and “move up”  would then be represented as $[1,2,2,2,1,1,3,3,3,1,1 ... 1]$
 
     \item Analysis
+    \begin{itemize}
+        \item What would you think of using elitism in a steady-state genetic algorithm? Do you think it is a good idea? What would be the benefits?
 
+
+
+        \item  Imagine that someone proposes a mutation operator for binary strings that is inspired on a uniform crossover. This mutation operator uses a binary template and only the elements located at positions of the template that contain a 1 will be flipped. What could you say about this mutation operator?
+        \item Imagine that linear ranking selection (using C = 2) is executed on a population of n chromosomes. What would be the effect on the selection probabilities if the fitness of every chromosome in the population is multiplied by a constant k?
+        \item Given a binary-string chromosome of 100 genes and a mutation rate pm = 0.01 (that is evaluated independently for each gene in the chromosome), what is the probability that a given chromosome  remains unaltered during the mutation phase? What would be the probability that a given chromosome remains unaltered during the mutation phase if pm = 0.05? What value should we use for pm if we would like that around half of the genes in the chromosomes are fliped as a result of mutation?
+        \item Given two real-valued chromosomes of length five, ~x = {x1, x2, x3, x4, x5} and ~y = {y1, y2, y3, y4, y5}, what would be the result of combining ~x and ~y through a whole arithmetic crossover with $\alpha$ = 1.0? How would the offspring change if $\alpha$ = 0?
+    \end{itemize}
 
 \end{enumerate}
 \end{document}
