@@ -79,9 +79,9 @@
 \begin{enumerate}
     \item \section*{The eight queens puzzle}
     \begin{itemize}
-        \item Propose one suitable chromosome representation and briefly justify your answer.  By using the chromo-some representation you propose, indicate how the chessboard depicted in Fig. 1 would be representedin the genetic algorithm.
+        \item Propose one suitable chromosome representation and briefly justify your answer.  By using the chromo-some representation you propose, indicate how the chessboard depicted in Fig. 1 would be represented in the genetic algorithm.
 
-        A simple, but useful represantion would be one of a list of integers from 1 to 8, without allowing repetition. In this form, the problem would be even easier to solve as multiple invalid states would be trimmed from the start. And well, the representation of the board shown would be [5,3,1,7,2,8,6,4]
+        A simple, but useful representation would be one of a list of integers from 1 to 8, without allowing repetition. In this form, the problem would be even easier to solve as multiple invalid states would be trimmed from the start. And well, the representation of the board shown would be [5,3,1,7,2,8,6,4]
 
         \item Propose one suitable selection strategy and briefly justify your answer.
         A tournament selection with an m of 4 would probably select very good representations fast as there is not that many options for the list
@@ -186,12 +186,67 @@
             m(H_4,t +1) &= 2.92 * 1 * 0.999 = 2.91708\\
         \end{align*}
     \item \section*{Steady-state genetic algorithm}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{c|c|c}
+            & Population & $f$ \\
+            \hline
+            $A_1$ & 83251 & 240 \\
+            $A_2$ & 42262 & 192 \\
+            $A_3$ & 73455 & 2100 \\
+            $A_4$ & 92113 & 54 \\
+            $A_5$ & 12354 & 120 \\
+        \end{tabular}
+    \end{table}
+
+    Remove $A_4$ and $A_5$
+
+    Crossover point = $1 + mod(7+3+4+5+5+8+3+2+5+1, 4)$ = 4
+
+    Children are $73451$ and $83255$
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{c|c|c}
+            & Population & $f$ \\
+            \hline
+            $A_1$ & 83251 & 240 \\
+            $A_2$ & 42262 & 192 \\
+            $A_3$ & 73455 & 2100 \\
+            $A_4$ & 73451 & 420 \\
+            $A_5$ & 83255 & 1200 \\
+        \end{tabular}
+    \end{table}
+
+    Remove $A_1$ and $A_2$
+
+    Crossover point = $1 + mod(7+3+4+5+5+8+3+2+5+5, 4)$ = 4
+
+    Children are $73455$ and $83255$
+
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{c|c|c}
+            & Population & $f$ \\
+            \hline
+            $A_1$ & 73455 & 2100 \\
+            $A_2$ & 83255 & 1200 \\
+            $A_3$ & 73455 & 2100 \\
+            $A_4$ & 73451 & 420 \\
+            $A_5$ & 83255 & 1200 \\
+        \end{tabular}
+    \end{table}
+    Remove $A_4$ and $A_5$
+    Crossover point = $1 + mod(7+3+4+5+5+7+3+4+5+5, 4)$ = 1
+    Children are $73455$ and $73455$
+
 
     \item \section*{Analyze the cases}
     \begin{itemize}
         \item Case 1 $\rightarrow$ We should reduce the mutation rate
         \item Case 2 $\rightarrow$ We should increase the population size
-        \item Case 3 $\rightarrow$ This is the expected behaviour
+        \item Case 3 $\rightarrow$ This is the expected behavior
     \end{itemize}
 
 \end{enumerate}
