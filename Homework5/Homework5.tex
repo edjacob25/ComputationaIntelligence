@@ -1,0 +1,139 @@
+\documentclass{article}
+    % General document formatting
+    \usepackage[margin=0.7in]{geometry}
+    \usepackage[parfill]{parskip}
+    \usepackage[utf8]{inputenc}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{tikz}
+    \usepackage{fancyhdr}
+    \usepackage{listings}
+    \usepackage{multicol}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Edgar Jacob Rivera Rios - A01184125}
+
+\begin{document}
+\begin{titlepage}
+
+    \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+    \center % Center everything on the page
+
+    %----------------------------------------------------------------------------------------
+    %	HEADING SECTIONS
+    %----------------------------------------------------------------------------------------
+
+    \textsc{\LARGE Tecnológico de Monterrey}\\[1.5cm] % Name of your university/college
+    \textsc{\Large Computational intelligence}\\[0.5cm] % Major heading such as course name
+    %\textsc{\large Minor Heading}\\[0.5cm] % Minor heading such as course title
+
+    %----------------------------------------------------------------------------------------
+    %	TITLE SECTION
+    %----------------------------------------------------------------------------------------
+
+    \HRule \\[0.4cm]
+    { \huge \bfseries Homework 5}\\[0.4cm] % Title of your document
+    \HRule \\[1.5cm]
+
+    %----------------------------------------------------------------------------------------
+    %	AUTHOR SECTION
+    %----------------------------------------------------------------------------------------
+
+    \begin{minipage}{0.4\textwidth}
+    \begin{flushleft} \large
+    \emph{Student:}\\
+    Jacob \textsc{Rivera} % Your name
+    \end{flushleft}
+    \end{minipage}
+    ~
+    \begin{minipage}{0.4\textwidth}
+    \begin{flushright} \large
+    \emph{Professor:} \\
+    Dr. José Carlos \textsc{Bayliss} % Supervisor's Name
+    \end{flushright}
+    \end{minipage}\\[2cm]
+
+    % If you don't want a supervisor, uncomment the two lines below and remove the section above
+    %\Large \emph{Author:}\\
+    %John \textsc{Smith}\\[3cm] % Your name
+
+    %----------------------------------------------------------------------------------------
+    %	DATE SECTION
+    %----------------------------------------------------------------------------------------
+
+    {\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+    %----------------------------------------------------------------------------------------
+    %	LOGO SECTION
+    %----------------------------------------------------------------------------------------
+
+    \includegraphics[width=0.4\textwidth,height=\textheight,keepaspectratio]{../Assets/logo-tec-negro.png} % Include a department/university logo - this will require the graphicx package
+
+    %----------------------------------------------------------------------------------------
+
+    \vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+\section{Partially mapped crossover}
+Apply the PMX operator to combine the following two parents. Assume that the two points selected for crossover are two and five, and that the numbering of the crossover points starts at 1.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cc}
+        Parent A: &2 8 3 6 1 4 5 7\\
+        Parent B: &1 2 3 6 7 5 8 4
+    \end{tabular}
+\end{table}
+\section{Selecting the best representation}
+A company wants to determine the best representation for a planning problem. The problem this company tries to solve requires to find a sequence of 12 actions in order to move a robot from point A to point
+B (the robot is located on a grid along with some obstacles). The robot has four available actions in its repository: UP, DOWN, LEFT, and RIGHT. Any of these actions takes exactly one second to execute. Since you are a well-known expert on genetic algorithms, this company is requesting your help to make a choice that maximizes the opportunities that its genetic algorithm implementation fins a good-quality solution for the problem. Given the limited amount of resources for the project, they have only considered two representations for its genetic algorithm implementation: binary and integer-based representations. Also, they have already decided that, regardless of the chosen representation, they will use linear ranking selection and one-point crossover, and that pc = 1 and pm = 0.
+
+Just hours before you submit your report with the recommended representation (and the corresponding justification), you are informed that a new action will be added to the robot’s repository: JUMP (which allows the robot to jump over the obstacles in the direction of the previous move). How would this change affect your decision on the representation to recommend? Justify your answer.
+
+\section{Schemata analysis}
+For this exercise, assume that the chromosomes in a genetic algorithm are coded as six-bit strings, and that the fitness of each chromosome is calculated as the number of ones in the chromosome. For example, the
+chromosomes 110101 and 001100 have a fitness of 4 and 2, respectively.
+
+Imagine that, at some generation $t$, the population in the genetic algorithm looks as follows:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c}
+        \hline
+        Population  \\
+        \hline
+        101000\\
+        001101\\
+        011011\\
+        010100\\
+        110010\\
+        \hline
+    \end{tabular}
+\end{table}
+
+Calculate the expected number of chromosomes that will contain the following schemata in the new population (at generation $t + 1$): $H_1 = *01*10$, $H_2 = **01**$, $H_3 = *10***$, and $H_4 = ***0**$. For your
+calculations, consider $p_c = 0.90$ and $p_m = 0.01$.
+
+\section{Probability of surviving crossover}
+We have already seen how to calculate the probability of surviving one-point crossover for binary strings. This time, you will explore the effect of using a two-point crossover operator and how it affects the probability of surviving crossover for the following schemata: H1 = *100*1*, H2 = 1*0****, and H3 = *00**11.
+
+Hint: Although you can solve this exercise analytically, I suggest you to analyze each one of the cases in a similar way as we did it in class (by counting the possible crossover points and the proportion of them that will destroy the corresponding schema).
+
+
+\section{Genetic programming}
+In this exercise, you will use genetic programming to generate boolean expressions (represented as functions). The following list indicates the inputs of the objective boolean expression and its corresponding outputs: f(false, false) = true, f(false, true) = false, f(true, false) = true, and f(1, 1) = 0. Please note that, in order to generate a function, we need to provide variables as inputs (instead of the actual values true and false). Then, the terminal set for this exercise will contain only the variables x and y, such that we can express the function as f(x, y).
+
+The following tree-based data structure depicts one possible function generated during the evolutionary process.
+
+In this case, the corresponding boolean expression x AND (NOT(y)) produces a correct result in three out of four cases: false AND (NOT(true)), true AND (NOT(false)), and true AND (NOT(true)); but it fails for the case false AND (NOT(false)) (produces false but the objective function requires true). Then, its fitness is 3/4 = 0.75.
+
+Given this information, answer the following questions or do what is requested (each question or request is independent from the rest).
+\begin{itemize}
+    \item Do we need to include ephemear constants in the terminal set? Justify your answer.
+    \item What is the minimal terminal set required to fulfill the sufficiency property of the function and terminal     sets? Explain your answer.
+    \item Assuming that the terminal set contains the operations AND, OR, XOR and NOT, how would you represent, by using a tree-based data structure, the expression (x AND y) OR NOT(x XOR y)?
+    \item Assuming that the terminal set contains the operations AND, OR and NOT, what is the fitness of the expression (x AND NOT(y)) OR NOT(x OR y)?
+    \item What would be the fitness of the tree-based data structure depicted in the following picture:
+\end{itemize}
+\end{document}
