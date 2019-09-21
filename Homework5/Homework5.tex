@@ -6,6 +6,7 @@
     \usepackage{amsmath}
     \usepackage{amssymb}
     \usepackage{tikz}
+    \usetikzlibrary{positioning}
     \usepackage{fancyhdr}
     \usepackage{listings}
     \usepackage{multicol}
@@ -150,7 +151,7 @@ Avg = 2.8
     m(H_1,t) \frac{f(H_1)}{f}&= 0 *\frac{0}{2.8} = 0\\
     m(H_2,t) \frac{f(H_2)}{f}&= 1 *\frac{2}{2.8} = 0.7142\\
     m(H_3,t) \frac{f(H_3)}{f}&= 2 *\frac{2.5}{2.8} = 1.7857\\
-    m(H_4,t) \frac{f(H_4)}{f}&= 3 *\frac{4}{2.8} = 4.2857\\
+    m(H_4,t) \frac{f(H_4)}{f}&= 3 *\frac{3}{2.8} = 3.2142\\
 \end{align*}
 
 \subsubsection*{Crossover}
@@ -206,17 +207,40 @@ $p_m = 0.01$
     m(H_1,t +1) &= 0 * 0.28 * 0.9605 = 0\\
     m(H_2,t +1) &= 0.7142 * 0.82 * 0.9801 = 0.5739896844\\
     m(H_3,t +1) &= 1.7857 * 0.82 * 0.9801 = 1.435134947\\
-    m(H_4,t +1) &= 4.2857 * 1 * 0.999 = 4.2814143\\
+    m(H_4,t +1) &= 3.2142 * 1 * 0.999 = 3.2109858\\
 \end{align*}
 
 \section{Probability of surviving crossover}
 We have already seen how to calculate the probability of surviving one-point crossover for binary strings. This time, you will explore the effect of using a two-point crossover operator and how it affects the probability of surviving crossover for the following schemata: $H_1 = *100*1*$, $H_2 = 1*0****$, and $H_3 = *00**11$.
 
-Hint: Although you can solve this exercise analytically, I suggest you to analyze each one of the cases in a similar way as we did it in class (by counting the possible crossover points and the proportion of them that will destroy the corresponding schema).
+Given that using a two-point crossover can only be used between indices 1 and 6, starting from 0 and we use two of them, we can use the following table to see the possibilities:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c||c||c}
+       Pair &  Pair &  Pair \\
+        \hline
+        1, 2 & 1, 3 & 1, 4 \\
+        1, 5 & 1, 6 & 2, 3 \\
+        2, 4 & 2, 5 & 2, 6 \\
+        3, 4 & 3, 5 & 3, 6 \\
+        4, 5 & 4, 6 & 5, 6 \\
+    \end{tabular}
+\end{table}
 
+After that we can then see that for the schemata to survive, it must no be cut between the fixed values. Therefore, we can then obtain the possibilities of survival by simply counting the pairs that attain this condition and divide it by the total of pairs. Which is shown here:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c}
+        Schemata & Pairs in which it survives & Probability of survival \\
+        \hline
+        $H_1$ & (1, 6), (4, 5) & $\frac{2}{15}$ \\
+        $H_2$ & (1, 2), (3, 4), (3, 5), (3, 6), (4, 5), (4, 6), (5, 6) & $\frac{7}{15}$  \\
+        $H_3$ & (3, 4), (3, 5), (4, 5) & $\frac{3}{15}$ \\
+    \end{tabular}
+\end{table}
 
 \section{Genetic programming}
-In this exercise, you will use genetic programming to generate boolean expressions (represented as functions). The following list indicates the inputs of the objective boolean expression and its corresponding outputs: f(false, false) = true, f(false, true) = false, f(true, false) = true, and f(1, 1) = 0. Please note that, in order to generate a function, we need to provide variables as inputs (instead of the actual values true and false). Then, the terminal set for this exercise will contain only the variables x and y, such that we can express the function as f(x, y).
+In this exercise, you will use genetic programming to generate boolean expressions (represented as functions). The following list indicates the inputs of the objective boolean expression and its corresponding outputs: f(false, false) = true, f(false, true) = false, f(true, false) = true, and f(true, true) = false. Please note that, in order to generate a function, we need to provide variables as inputs (instead of the actual values true and false). Then, the terminal set for this exercise will contain only the variables x and y, such that we can express the function as f(x, y).
 
 The following tree-based data structure depicts one possible function generated during the evolutionary process.
 
@@ -224,10 +248,59 @@ In this case, the corresponding boolean expression x AND (NOT(y)) produces a cor
 
 Given this information, answer the following questions or do what is requested (each question or request is independent from the rest).
 \begin{itemize}
-    \item Do we need to include ephemear constants in the terminal set? Justify your answer.
-    \item What is the minimal terminal set required to fulfill the sufficiency property of the function and terminal     sets? Explain your answer.
+    \item Do we need to include ephemeral constants in the terminal set? Justify your answer.
+
+    Its not necessary given that the expression needs to be reduced before being evaluated. And the results of each operation are the same as any of the terminals.
+
+    \item What is the minimal terminal set required to fulfill the sufficiency property of the function and terminal sets? Explain your answer.
+
+    Terminal set = $\{1, 0, x, y\}$\\
+    Function set = $\{AND, OR, NOT\}$
+
     \item Assuming that the terminal set contains the operations AND, OR, XOR and NOT, how would you represent, by using a tree-based data structure, the expression (x AND y) OR NOT(x XOR y)?
+
+    \begin{center}
+        \begin{tikzpicture}[sibling  every node/.style = {align=center}]
+          \node {OR}
+            child {node {AND}
+                child {node {x}}
+                child {node {y}}}
+            child {node {NOT}
+                child {node {XOR}
+                    child {node {x}}
+                    child {node {y}}}};
+        \end{tikzpicture}
+    \end{center}
+
     \item Assuming that the terminal set contains the operations AND, OR and NOT, what is the fitness of the expression (x AND NOT(y)) OR NOT(x OR y)?
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{c|c|c|c|c}
+            x & y & x AND NOT(y) & NOT(x OR y) & (x AND NOT(y)) OR NOT(x OR y)\\
+            \hline
+            0 & 0 & 0 & 1 & 1 \\
+            0 & 1 & 0 & 0 & 0 \\
+            1 & 0 & 1 & 0 & 1 \\
+            1 & 1 & 0 & 0 & 0 \\
+        \end{tabular}
+    \end{table}
+
+    Given the in initial conditions, this gives us a $4/4$ or a 100\% fitness
+
     \item What would be the fitness of the tree-based data structure depicted in the following picture:
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{c|c|c|c|c|c}
+            x & y & x OR y & y AND x & (y AND x) OR Y & NOT((x OR y) OR ((y AND x) OR Y)) \\
+            \hline
+            0 & 0 & 0 & 0 & 0 & 1 \\
+            0 & 1 & 1 & 0 & 1 & 0 \\
+            1 & 0 & 1 & 0 & 1 & 0 \\
+            1 & 1 & 0 & 1 & 1 & 0 \\
+        \end{tabular}
+    \end{table}
+
+    Given the in initial conditions, this gives us a $3/4$ or a 75gs\% fitness
 \end{itemize}
 \end{document}
